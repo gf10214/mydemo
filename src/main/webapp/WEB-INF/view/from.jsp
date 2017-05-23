@@ -9,14 +9,28 @@
 <html>
 <head>
     <title>Title</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/html5.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/respond.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/PIE-2.0beta1/PIE_IE678.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/json2.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+
 </head>
 <body>
-<form name="form1" id="form1" action="${pageContext.request.contextPath}/saveForm" method="post">
+<form name="form1" id="form1" action="${pageContext.request.contextPath}/saveForm" enctype="multipart/form-data" method="post">
     <p>name:<input type="text" name="name" ></p>
     <p>file1:<input type="file" name="file" ></p>
     <p>file2:<input type="file" name="file" ></p>
+    <INPUT TYPE="file" NAME="file" SIZE="30" onchange="getFileSize(this)">
+    <img id='img1' dynsrc=''/>
     <p><input type="submit" name="b1" value="submit"></p>
 </form>
 <script>
@@ -28,6 +42,8 @@
            var data=$.parseJSON(data);
            if(data.code==0){
                alert(data.msg);
+           }else{
+               alert(data.msg);
            }
         },
         error:function(){
@@ -37,7 +53,15 @@
     $(function(){
         $('#form1').ajaxForm(options);
     });
-
+    function getFileSize(fileObj)
+    {
+        //不能使用new Image，ie下报无dynsrc属性
+        var img1 = document.getElementById('img1');
+        img1.dynsrc=fileObj.value;
+        //img1.fileSize：IE ， fileObj.files[0].fileSize：chrome， fileObj.files[0].size：FF
+        var size = img1.fileSize || fileObj.files[0].fileSize || fileObj.files[0].size;
+        alert(size);
+    }
 </script>
 </body>
 </html>
