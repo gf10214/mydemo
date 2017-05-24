@@ -36,22 +36,17 @@
         beforeSubmit: function(){
             alert("调用前加遮罩");
         },
-        success:function(responseText,statusText,xhr,form) {
-//            alert(responseText);
-//            alert(statusText);
-//            alert(xhr);
-//            alert(form);
+        success:function(responseText) {
             try{
                 var data=$.parseJSON(responseText);
+                if(data.code==0){
+                    alert(data.msg);
+                }else{
+                    alert(data.msg);
+                }
             }catch (e){
                 alert("文件过长");
             }
-            //var data=$.parseJSON(data);
-//           if(data.code==0){
-//               alert(data.msg);
-//           }else{
-//               alert(data.msg);
-//           }
         },
         error:function(){
             alert("失败");

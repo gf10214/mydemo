@@ -35,7 +35,6 @@ public class FormController {
         System.out.println(files);
         System.out.println(name);
         result.setMsg("成功了");
-        int a=1/0;
         response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-Type", "text/html");
         try {
