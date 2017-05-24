@@ -35,15 +35,22 @@ public class FormController {
         System.out.println(files);
         System.out.println(name);
         result.setMsg("成功了");
+        int a=1/0;
         response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-Type", "text/html");
         try {
+
             response.getWriter().write(JsonMapper.getInstance().toJson(result));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+    @ResponseBody
+    @RequestMapping("aaaaaa")
+    public String saveForm2(HttpServletResponse response){
+        int a=1/0;
+        return null;
+    }
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public String handleException(MaxUploadSizeExceededException ex, HttpServletRequest request) {
         System.out.println("错误文件上传");

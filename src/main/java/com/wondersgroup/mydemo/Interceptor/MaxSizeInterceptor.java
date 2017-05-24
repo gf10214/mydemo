@@ -18,6 +18,7 @@ public class MaxSizeInterceptor extends HandlerInterceptorAdapter {
         //判断是否文件上传
         if(request!=null && ServletFileUpload.isMultipartContent(request)) {
             ServletRequestContext ctx = new ServletRequestContext(request);
+
             JsonResponseEntity<String> result = new JsonResponseEntity<>();
             //获取上传文件尺寸大小
             long requestSize = ctx.contentLength();

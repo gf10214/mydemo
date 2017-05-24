@@ -9,14 +9,26 @@
 <html>
 <head>
     <title>Title</title>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
 </head>
 <body>
-<form name="form1" id="form1" action="${pageContext.request.contextPath}/saveForm" enctype="multipart/form-data" method="post">
-    <p>name:<input type="text" name="name" ></p>
-    <p>file1:<input type="file" name="file" ></p>
-    <p>file2:<input type="file" name="file" ></p>
-    <p><input type="submit" name="b1" value="submit"></p>
-</form>
-<iframe name="uploadIframe" id="uploadIframe" style="display:none"></iframe>
+
+    <p><input type="button" name="b1" value="submit" onclick="aaaa()"></p>
 </body>
+<script>
+    function aaaa(){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/aaaaaa",
+            type: "post",
+            async: false,
+            dataType: "json",
+            success:function(data){
+               alert("成功")
+            }
+//            error:function(){
+//                alert("失败");
+//            }
+        });
+    }
+</script>
 </html>

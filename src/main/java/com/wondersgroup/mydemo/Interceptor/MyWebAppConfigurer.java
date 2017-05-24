@@ -12,7 +12,7 @@ public class MyWebAppConfigurer  extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         MaxSizeInterceptor maxSizeInterceptor=new MaxSizeInterceptor();
-        maxSizeInterceptor.setMaxSize(10240);//10kb
+        maxSizeInterceptor.setMaxSize(102400000);//10kb
         registry.addInterceptor(maxSizeInterceptor).addPathPatterns("/**");
         super.addInterceptors(registry);
     }

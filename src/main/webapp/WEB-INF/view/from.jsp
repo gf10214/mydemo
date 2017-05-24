@@ -29,8 +29,6 @@
     <p>name:<input type="text" name="name" ></p>
     <p>file1:<input type="file" name="file" ></p>
     <p>file2:<input type="file" name="file" ></p>
-    <INPUT TYPE="file" NAME="file" SIZE="30" onchange="getFileSize(this)">
-    <img id='img1' dynsrc=''/>
     <p><input type="submit" name="b1" value="submit"></p>
 </form>
 <script>
@@ -38,30 +36,35 @@
         beforeSubmit: function(){
             alert("调用前加遮罩");
         },
-        success:function(data) {
-           var data=$.parseJSON(data);
-           if(data.code==0){
-               alert(data.msg);
-           }else{
-               alert(data.msg);
-           }
+        success:function(responseText,statusText,xhr,form) {
+//            alert(responseText);
+//            alert(statusText);
+//            alert(xhr);
+//            alert(form);
+            try{
+                var data=$.parseJSON(responseText);
+            }catch (e){
+                alert("文件过长");
+            }
+            //var data=$.parseJSON(data);
+//           if(data.code==0){
+//               alert(data.msg);
+//           }else{
+//               alert(data.msg);
+//           }
         },
         error:function(){
-            alert("保存失败")
+            alert("失败");
         }
     };
     $(function(){
-        $('#form1').ajaxForm(options);
+        try{
+            $('#form1').ajaxForm(options);
+        } catch (e) {
+            alert("文件过长");
+        }
     });
-    function getFileSize(fileObj)
-    {
-        //不能使用new Image，ie下报无dynsrc属性
-        var img1 = document.getElementById('img1');
-        img1.dynsrc=fileObj.value;
-        //img1.fileSize：IE ， fileObj.files[0].fileSize：chrome， fileObj.files[0].size：FF
-        var size = img1.fileSize || fileObj.files[0].fileSize || fileObj.files[0].size;
-        alert(size);
-    }
+
 </script>
 </body>
 </html>
